@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Show Applicants{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="#">Applicants</a></li>
+{% endblock %}
+
+{% block content %}
+	<caption>Applicant Information Table</caption>
+	<table class="table">
+		<thead class="thead-inverse">
+			<tr>
+				<th>Reg Id</th>
+				<th>Name</th>
+				<th>Birth Date</th>
+				<th>Contact No</th>
+				<th>Picture</th>
+			</tr>
+		</thead>
+		<tbody>	
+			{%for ap in applicator%}
+				<tr>
+					<td>{{ap.id}}</td>
+					<td>{{ap.name}}</td>
+					<td>{{ap.birthdate}}</td>
+					<td>{{ap.contact_no}}</td>
+					<td><a href="{{ap.image.url}}">Image</a></td>
+				</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+	<caption>Payment table</caption>
+	<table class="table">
+		<thead class="thead-inverse">
+			<tr>
+				<th>Reg Id</th>
+				<th>Name</th>
+				<th>Contact No</th>
+				<th>Payment</th>
+				<th>Admit Card</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%for pay in payments%}
+				<tr>
+					<td>{{pay.applicant.id}}</td>
+					<td>{{pay.applicant.name}}</td>
+					<td>{{pay.applicant.contact_no}}</td>
+					{%if pay.is_verified%}
+					<td>Paid</td>
+					{%else%}
+					<td>Pending</td >
+					{%endif%}
+					<td></td>
+				</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+	
+{% endblock %}
